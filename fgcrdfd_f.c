@@ -45,8 +45,8 @@ void pref(double **x, int xs, int ys, int fr, int prfn, double **y)
       y[i][j] = tmp;
     }
   }
-}
 
+}
 /*---------------------------------------------------------------------------*/
 void mzdfd(double ***bpfinp, int nz, int xbc, int ybc, int bs, 
 	   double *dini, double *kini, int *maxz)
@@ -393,23 +393,23 @@ void  trwin_2D(COMPLEX **f, int N)
     for(i = 0, ii = -nc ; i < N ; i++, ii++) {
       absii = abs(ii);
       if (absii == nc || absjj == nc) {
-	f[i][j].r = 0.4 * f[i][j].r;
-	f[i][j].i = 0.4 * f[i][j].i;
+	f[i][j].r = 0.26 * f[i][j].r;
+	f[i][j].i = 0.26 * f[i][j].i;
       } else if (absii == nc - 1 || absjj == nc - 1 ) {
-	f[i][j].r = 0.5 * f[i][j].r;
-	f[i][j].i = 0.5 * f[i][j].i;
+	f[i][j].r = 0.44 * f[i][j].r;
+	f[i][j].i = 0.44 * f[i][j].i;
       } else if (absii == nc - 2 || absjj == nc - 2 ) {
 	f[i][j].r = 0.6 * f[i][j].r;
 	f[i][j].i = 0.6 * f[i][j].i;
       } else if (absii == nc - 3 || absjj == nc - 3 ) {
-	f[i][j].r = 0.7 * f[i][j].r;
-	f[i][j].i = 0.7 * f[i][j].i;
+	f[i][j].r = 0.72 * f[i][j].r;
+	f[i][j].i = 0.72 * f[i][j].i;
       } else if (absii == nc - 4 || absjj == nc - 4 ) {
-	f[i][j].r = 0.8 * f[i][j].r;
-	f[i][j].i = 0.8 * f[i][j].i;
+	f[i][j].r = 0.84 * f[i][j].r;
+	f[i][j].i = 0.84 * f[i][j].i;
       } else if (absii == nc - 5 || absjj == nc - 5 ) {
-	f[i][j].r = 0.9 * f[i][j].r;
-	f[i][j].i = 0.9 * f[i][j].i;
+	f[i][j].r = 0.89 * f[i][j].r;
+	f[i][j].i = 0.89 * f[i][j].i;
       }
     }
   }
@@ -435,7 +435,8 @@ void PSF(double z, double d, double k, int N, double **P)
   double kzd, sgm2s2, pi2N, wx, wy, w2; 
   
   kzd = k * (z - d);
-  sgm2s2 = kzd * kzd / 2.0;
+  sgm2s2 = kzd * kzd + SGMC * SGMC;
+  sgm2s2 = sgm2s2 / 2.0;
   pi2N = 2.0 * M_PI / (double) N;
 
   for(j = 0 ; j < N ; j++) {
@@ -541,10 +542,17 @@ double S_double_double(double **a, double **b, int N)
 	}
 	r = sqrt((double)(ii * ii + jj * jj));
 	w[i][j] = tanh(c * r);
+	/*if(i == 0) w[i][j] = 0.3;
+	if(i == (N-1)) w[i][j] = 0.3;
+	if(j == 0) w[i][j] = 0.3;
+	if(j == (N-1)) w[i][j] = 0.3;
+	if(i == 0 && j == 0) w[i][j] = 0.0;
+	if(i == 0 && j == (N-1)) w[i][j] = 0.0;
+	if(i == (N-1) && j == 0) w[i][j] = 0.0;
+	if(i == (N-1) && j == (N-1)) w[i][j] = 0.0;*/
       }
     }
-
-    /*
+    
     {    
       FILE *fp;
     
@@ -557,7 +565,7 @@ double S_double_double(double **a, double **b, int N)
       }
       fclose(fp);
     }
-    */
+    
       
     first = 0;
   }

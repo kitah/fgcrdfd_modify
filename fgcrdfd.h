@@ -19,7 +19,8 @@
 #define ERR_MAX  0.1    /* 推定誤差計算時にこれ以上の誤差は無視 */
 #define GN_EPS   0.1    /* Gauss-Newton 法の誤差減少率限界 */
 #define GN_MAX   10      /* Gauss-Newton 法の最大繰返し回数 */
-#define SGMC     0.62
+#define SGMC     0.1
+//#define SGMC     0.0
 
 /***** デフォルト *****/
 #define BS_DEFAULT        15    /* ブロックサイズ   11 or 13 程度が best? */
